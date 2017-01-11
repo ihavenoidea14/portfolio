@@ -5,10 +5,10 @@ var favicon = require('serve-favicon');
 var exphbs = require('express-handlebars');
 
 var index = require('./routes/index');
+var sendmail = require('./routes/sendmail');
 
 var app = express();
 
-//app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
   next();
 });
 
-
 app.use('/', index);
+app.use('/email', sendmail);
 
 module.exports = app;
